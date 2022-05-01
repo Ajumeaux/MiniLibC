@@ -1,0 +1,38 @@
+##
+## EPITECH PROJECT, 2022
+## B-ASM-400-LIL-4-1-asmminilibc-antoine.jumeaux
+## File description:
+## Makefile
+##
+
+SRC     =   		strlen.asm \
+			strchr.asm \
+			strrchr.asm \
+			memset.asm \
+			memcpy.asm \
+			strcmp.asm \
+			memmove.asm \
+			strncmp.asm \
+			strpbrk.asm \
+			strstr.asm
+
+
+OBJ     =   $(SRC:.asm=.o)
+
+NAME    =   libasm.so
+
+FLAGS   =   -f elf64
+
+all: $(OBJ)
+	ld -fPIC -shared $(OBJ) -o $(NAME)
+
+%.o:    %.asm
+	nasm $(FLAGS) $<
+
+clean:
+	@rm -f *.o
+
+fclean: clean
+	@rm -f $(NAME)
+
+re: fclean all
